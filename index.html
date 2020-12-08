@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.common.dev.min.js" integrity="sha512-PkyFg1MEb/EwsFAqzqvZqWdMT4ItV+E1NgOtfBC9X8UecJcO9bwirD+v/9tJwci4wTNHdNYBk4ev6ceb1hy73g==" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id='todo'>
+        <input type="text" v-model="insert"/>
+        <button v-on:click="add">Add</button>
+        <ul>
+            <li v-for='(each, index) in items' v-on:click=remove(index)>{{each}}</li>
+        </ul>
+    </div>
+    
+</body>
+<script>
+    const todo = new Vue({
+        el: "#todo",
+        data:{
+            insert:'',
+            items:["first","second","third"],
+        },
+        methods:{
+            add(){
+                this.items.push(this.insert);
+            },
+            remove(index){
+                this.items.splice(index,1);
+            }
+        },
+    });
+</script>
+</html>

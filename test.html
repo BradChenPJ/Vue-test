@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="http://unpkg.com/vue@next"></script>
+</head>
+<body>
+    <div id="app">
+        {{message}}
+    </div>
+    <div id='app2'>
+        <span v-if='see'>Now you see me</span>
+        <span v-else>Now you don't</span>
+        <div v-for="each in steps">{{each}}</div>
+    </div>
+    <div id='counter'>
+        <h1>{{count}}</h1>
+    </div>
+    <button @click="add">+1</button>
+
+    <script>
+        const {createApp} = Vue;
+        const app = createApp({
+            //data的值為factory function (回傳物件的function)
+            data: () => ({
+                message:"HHH",
+            }),
+            //也可以用這種
+            /*
+            data(){
+                return{message:"hello",};
+            },
+            */
+
+        });
+        app.mount("#app");
+        
+        const app2 = createApp({
+            data: ()=>({
+                see: false,
+                steps: ["1","2","3"],
+            }),
+        });
+        app2.mount('#app2');
+
+        const counter = createApp({
+            data: () => ({
+                count: 0,
+            }),
+            methods: ()=>({
+                add(){
+                    this.count+=1;
+                },
+            }),
+        });
+        counter.mount("#counter");
+    </script>
+</body>
+</html>

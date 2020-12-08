@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.common.dev.min.js" integrity="sha512-PkyFg1MEb/EwsFAqzqvZqWdMT4ItV+E1NgOtfBC9X8UecJcO9bwirD+v/9tJwci4wTNHdNYBk4ev6ceb1hy73g==" crossorigin="anonymous"></script>
+</head>
+<style>
+    a{
+        text-decoration: none;
+        color: black;
+    }
+    h1,h5{
+        font-family:sans-serif;
+    }
+    .teacher{
+        color:gray;
+    }
+    .lesson{
+        position: relative;
+        display: inline-block;
+        width:200px;
+        margin: 10px;
+        padding:8px;
+        padding-top: 100px;
+        box-shadow: 10px 10px 5px grey;
+        border-radius: 5px;
+        height:130px;
+        overflow: hidden;
+    }
+    .image{
+        position: absolute;
+        top: 0;
+        left: 0;
+        height:100px;
+        width:100%;
+        background-position: center center;
+        background-size: cover;
+        
+    }
+</style>
+<body>
+    <div id="app">
+        <div class="lesson" v-for='lesson in lessons'>
+            <div class='image' :style="imgStyle(lesson.img)"></div>
+            
+            <a :href='lesson.url'>
+                <h1 style='font-size:18px;'>{{lesson.title}}</h1>
+            </a>
+            <h5 class='teacher'>{{lesson.teacher}}</h5>
+        </div>
+    </div>
+
+</body>
+<script>
+    const jsonData = new Vue({
+        el:'#app',
+        data:{
+            lessons:[],
+        },
+        methods:{
+            imgStyle(imgURL){
+                return{
+                    backgroundImage: `url(${imgURL})`,
+                };
+            },
+        },
+        mounted(){
+            fetch('./data.json').then(response => response.json()).then(jsondata => {this.lessons = jsondata; return this.lessons;})
+        },
+
+    });
+
+</script>
+</html>

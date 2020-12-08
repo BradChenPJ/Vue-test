@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.common.dev.min.js" integrity="sha512-PkyFg1MEb/EwsFAqzqvZqWdMT4ItV+E1NgOtfBC9X8UecJcO9bwirD+v/9tJwci4wTNHdNYBk4ev6ceb1hy73g==" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id='app'>
+        {{message}}
+    </div>
+    <div id ='app2'>
+        <span v-if='see'>Now you see me</span>
+        <span v-else>Now you don't</span>
+        <div v-for='each in steps'>{{each}}</div>
+    </div>
+    <div id='counter'>
+        <h1>{{count}}</h1>
+        <button v-on:click='add'>+1</button>
+        <input type='text' v-model='insert'/>
+        <span>{{insert}}</span>
+    </div>
+   
+    
+</body>
+<script>
+    app = new Vue({
+            el: '#app',
+            data:{
+                message: 'Hello World',
+            },
+            });
+    app2 = new Vue({
+        el:'#app2',
+        data: {
+            see: false,
+            steps: [1,2,3],
+        },
+    });
+    button = new Vue({
+        el: '#counter',
+        data:{
+            count: 0,
+            insert:'',
+        },
+        methods:{
+            add(){
+                this.count+=1;
+            }
+        },
+
+    })
+
+</script>
+</html>

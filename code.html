@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.6.12/vue.common.dev.min.js" integrity="sha512-PkyFg1MEb/EwsFAqzqvZqWdMT4ItV+E1NgOtfBC9X8UecJcO9bwirD+v/9tJwci4wTNHdNYBk4ev6ceb1hy73g==" crossorigin="anonymous"></script>
+</head>
+<body>
+    <div id='app'>
+        <input type='text' v-model='password'/>
+        <p>{{strength}}</p>
+    </div>
+    
+    
+</body>
+<script>
+    const code = new Vue({
+        el: '#app',
+        data:{
+            password: '',
+        },
+        computed:{
+            strength(){
+                let score = this.password.length;
+                if (/[A-Z]/.test(this.password)){ score *= 1.25};
+                if (/[a-z]/.test(this.password)){ score *= 1.25};
+                if (/[0-9]/.test(this.password)){ score *= 1.25};
+                if (/[^A-Za-z0-9]/.test(this.password)){ score *= 1.25};
+                if(score>40){ return 'Perfect'};
+                if(score>20){ return 'Greate'};
+                if(score>10){ return 'Good'};
+                return 'Week'
+            }
+        }
+    });
+</script>
+</html>
